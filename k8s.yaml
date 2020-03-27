@@ -1,0 +1,99 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  labels:
+    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+    spec:
+      containers:
+      - env:
+        - name: NODE_ENV
+          value: "production"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: OSS_BUCKET_DATA
+          value: "${OSS_BUCKET_DATA}"
+        - name: COMMON_ALIYUN_ACCESS_ID
+          value: "${COMMON_ALIYUN_ACCESS_ID}"
+        - name: COMMON_ALIYUN_ACCESS_SECRET
+          value: "${COMMON_ALIYUN_ACCESS_SECRET}"
+        - name: HARDCORE_OSS_ENDPOINT
+          value: "${HARDCORE_OSS_ENDPOINT}"
+        - name: PALADIN_EA_MAIN_URI
+          value: "${PALADIN_EA_MAIN_URI}"
+        - name: PALADIN_EA_USERNAME
+          value: "${PALADIN_EA_USERNAME}"
+        - name: PALADIN_EA_PASSWORD
+          value: "${PALADIN_EA_PASSWORD}"
+        - name: PALADIN_EA_CUSTOMERNAME
+          value: "${PALADIN_EA_CUSTOMERNAME}"
+        - name: PALADIN_EA_BUILDINGNAME
+          value: "${PALADIN_EA_BUILDINGNAME}"
+        - name: PALADIN_METAL_HOST
+          value: "${PALADIN_METAL_HOST}"
+        - name: PALADIN_ALERT_EMAIL
+          value: "${PALADIN_ALERT_EMAIL}"
+        - name: PALADIN_ALERT_PHONE
+          value: "${PALADIN_ALERT_PHONE}"
+        - name: TROJAN_HOST
+          value: "${TROJAN_HOST}"
+        image: {{ image_name }}
+        imagePullPolicy: Always
+        name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 15
+      imagePullSecrets:
+      - name: default-secret
+      nodeSelector:
+        envnode: ${ENV_NODE_LABEL}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+spec:
+  selector:
+    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+spec:
+  rules:
+  - host: ${HOST_I_PALADIN_{{ PROD_NAME }}_INCIDENT}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+          servicePort: 80
