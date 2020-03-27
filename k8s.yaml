@@ -19,6 +19,9 @@ spec:
     metadata:
       labels:
         app: {{ project }}-{{ role }} - 'incident'
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
     spec:
       containers:
       - env:
