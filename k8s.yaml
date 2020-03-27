@@ -2,14 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  name: {{ project }}-{{ role }} - 'incident'
   labels:
-    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+    app: {{ project }}-{{ role }} - 'incident'
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+      app: {{ project }}-{{ role }} - 'incident'
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+        app: {{ project }}-{{ role }} - 'incident'
     spec:
       containers:
       - env:
@@ -54,7 +54,7 @@ spec:
           value: "${TROJAN_HOST}"
         image: {{ image_name }}
         imagePullPolicy: Always
-        name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+        name: {{ project }}-{{ role }} - 'incident'
         livenessProbe:
           httpGet:
             path: /healthz
@@ -71,11 +71,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
-  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+    app: {{ project }}-{{ role }} - 'incident'
+  name: {{ project }}-{{ role }} - 'incident'
 spec:
   selector:
-    app: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+    app: {{ project }}-{{ role }} - 'incident'
   ports:
   - name: "80"
     port: 80
@@ -87,13 +87,13 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+  name: {{ project }}-{{ role }} - 'incident'
 spec:
   rules:
-  - host: ${HOST_I_PALADIN_{{ PROD_NAME }}_INCIDENT}
+  - host: ${HOST_I_PALADIN_EA_INCIDENT}
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{ project }}-{{ role }}-{{ PROD_NAME }} - 'incident'
+          serviceName: {{ project }}-{{ role }} - 'incident'
           servicePort: 80
