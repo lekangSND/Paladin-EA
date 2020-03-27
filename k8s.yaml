@@ -90,7 +90,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ project }}-{{ role }} - 'incident'
+  name: {{ project }}-{{ role }}-incident
 spec:
   rules:
   - host: ${HOST_I_PALADIN_EA_INCIDENT}
