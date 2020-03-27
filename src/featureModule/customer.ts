@@ -17,12 +17,12 @@ const TimeOutOption: Object = {
   timeout: NAV_TIMEOUT * 1000
 };
 function getCustomerName() {
-  let key = `PALADIN_${currentProd.toUpperCase()}_CUSTOMERNAME`;
+  let key = "PALADIN_EA_CUSTOMERNAME";
   return process.env[key];
 }
 
 function getBuidingName() {
-  let key = `PALADIN_${currentProd.toUpperCase()}_BUILDINGNAME`;
+  let key = "PALADIN_EA_BUILDINGNAME";
   return process.env[key];
 }
 
