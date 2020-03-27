@@ -220,8 +220,8 @@ async function getBrowser() {
       height: 1080
     },
     ignoreHTTPSErrors: true,
-    args,
-    headless: false
+    args
+    // headless: false
   });
 
   return browser;
