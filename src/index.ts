@@ -28,8 +28,6 @@ const accessKeyId = process.env["COMMON_ALIYUN_ACCESS_ID"];
 const bucket = process.env["OSS_BUCKET_DATA"];
 const interval = process.env["PALADIN_EA_Interval"] || "2";
 
-const PROD_NAME = process.env["PROD_NAME"];
-
 const NAV_TIMEOUT = parseInt(process.env["NAV_TIMEOUT"] || "15") * 1000;
 const CLICK_TIMEOUT = parseInt(process.env["CLICK_TIMEOUT"] || "5") * 1000;
 
