@@ -55,6 +55,8 @@ spec:
           value: "${PALADIN_ALERT_PHONE}"
         - name: TROJAN_HOST
           value: "${TROJAN_HOST}"
+        - name: PALADIN_EA_Interval
+          value: 2
         image: {{ image_name }}
         imagePullPolicy: Always
         name: {{ project }}-{{ role }}-incident
