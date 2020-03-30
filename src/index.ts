@@ -73,6 +73,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/metrics", (req, res) => {
+  logger.info(`paladin-ea start metrics collection`);
   res.set("Content-Type", register.contentType);
   res.status(200).send(register.metrics());
   if (isEnd) {
