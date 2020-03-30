@@ -26,6 +26,7 @@ const endpoint = process.env["HARDCORE_OSS_ENDPOINT"];
 const accessKeySecret = process.env["COMMON_ALIYUN_ACCESS_SECRET"];
 const accessKeyId = process.env["COMMON_ALIYUN_ACCESS_ID"];
 const bucket = process.env["OSS_BUCKET_DATA"];
+const interval = process.env["PALADIN_EA_Interval"] || 2;
 
 const PROD_NAME = process.env["PROD_NAME"];
 
@@ -72,9 +73,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/metrics", (req, res) => {
+  logger.info(`paladin-ea start metrics collection`);
   res.set("Content-Type", register.contentType);
   res.status(200).send(register.metrics());
   if (isEnd) {
+    logger.info(`paladin-ea reset metrics`);
     reset();
   }
 });
@@ -102,7 +105,7 @@ app.post("/maintain", (req, res) => {
 app.listen(port, () => {
   logger.info(`paladin app listening on port ${port}!`);
   start();
-  setInterval(start, 5 * 60 * 1000);
+  setInterval(start, parseInt(interval) * 60 * 1000);
 });
 
 async function createPage(browser: puppeteer.Browser) {
@@ -220,8 +223,8 @@ async function getBrowser() {
       height: 1080
     },
     ignoreHTTPSErrors: true,
-    args
-    // headless: false
+    args,
+    headless: false
   });
 
   return browser;
