@@ -26,7 +26,7 @@ const endpoint = process.env["HARDCORE_OSS_ENDPOINT"];
 const accessKeySecret = process.env["COMMON_ALIYUN_ACCESS_SECRET"];
 const accessKeyId = process.env["COMMON_ALIYUN_ACCESS_ID"];
 const bucket = process.env["OSS_BUCKET_DATA"];
-const interval = process.env["PALADIN_EA_Interval"] || 2;
+const interval = process.env["PALADIN_EA_Interval"] || "2";
 
 const PROD_NAME = process.env["PROD_NAME"];
 
