@@ -243,6 +243,12 @@ export async function selectMenu(
     );
 
     if (currentMonitoredMenuConfig) {
+      if (
+        currentMonitoredMenuConfig.children &&
+        !mainMenuConfig[index].hasSubMenus
+      ) {
+        continue;
+      }
       logger.info(
         "[selectMenu/selectMenu]::current menu is ",
         currentMonitoredMenuConfig.name
