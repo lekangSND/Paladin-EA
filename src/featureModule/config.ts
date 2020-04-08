@@ -16,6 +16,16 @@ export const MENU_NAV_TIMEOUT = 15;
 
 export const contentPageConfig: Array<MenuConfigObject> = [
   {
+    key: "ecms",
+    name: "节能方案",
+    validClass: ".jazz-ecm-tabs .selected",
+  },
+  {
+    key: "savings",
+    name: "节能效果",
+    validClass: ".jazz-save-effect .active",
+  },
+  {
     key: "dataanalysis",
     name: "数据分析",
     children: [
@@ -24,10 +34,37 @@ export const contentPageConfig: Array<MenuConfigObject> = [
         name: "数据分析",
         validClass: ".jazz-new-folder-leftpanel-header",
       },
+    ],
+  },
+  {
+    key: "smartdiagnose",
+    name: "智能诊断",
+    children: [
       {
-        key: "input_data",
-        name: "录入数据",
-        validClass: ".jazz-input-data-content-panel-header",
+        key: "configure_diagnosis",
+        name: "配置诊断",
+        validClass: ".diagnose-label-list",
+      },
+      {
+        key: "pre-diagnostic_report",
+        name: "预诊断报告",
+        validClass: ".createDiagnose",
+      },
+    ],
+  },
+  {
+    key: "Report",
+    name: "报告",
+    children: [
+      {
+        key: "report",
+        name: "数据报表",
+        validClass: ".jazz-report-chart-table-header-action",
+      },
+      {
+        key: "monthly_report",
+        name: "月度报告",
+        validClass: ".jazz-app-monthly-report-config-title3",
       },
     ],
   },
@@ -46,45 +83,17 @@ export const contentPageConfig: Array<MenuConfigObject> = [
         validClass: ".jazz-tag-leftpanel-header-item",
       },
       {
-        key: "tag_import_log",
-        name: "配置导入日志",
-        validClass: ".jazz-template-list",
-      },
-      {
         key: "hierarchy",
         name: "层级节点配置",
         validClass: ".jazz-tag-leftpanel-header-item",
-      },
-      {
-        key: "import_log",
-        name: "配置导入日志",
-        validClass: ".jazz-template-list",
-      },
-      {
-        key: "virtuat_gateway",
-        name: "虚拟网关",
-        validClass: ".title.customerName",
-        outer: true,
       },
       {
         key: "data_validation",
         name: "数据质量维护",
         validClass: ".data-quality-maintenance-filter-time",
       },
-
-      {
-        key: "kpi_cycle",
-        name: "指标计算周期",
-        validClass: ".header-bar",
-      },
     ],
   },
-  // {
-  //   key: "dashborad",
-  //   name: "Dashboard",
-  //   validClass: ".board-view-top-menu",
-  //   outer: true
-  // }
 ];
 
 export const sysMgmtBtnClass = ".jazz-customer-or-function";
@@ -104,16 +113,6 @@ export const sysMgmtPageConfig: Array<MenuConfigObject> = [
         name: "工作时间",
         validClass: ".jazz-calendar-title",
       },
-      {
-        key: "hc_season",
-        name: "冷暖季",
-        validClass: ".jazz-calendar-title",
-      },
-      {
-        key: "day_night",
-        name: "昼夜时间",
-        validClass: ".jazz-calendar-title",
-      },
     ],
   },
   {
@@ -124,11 +123,6 @@ export const sysMgmtPageConfig: Array<MenuConfigObject> = [
         key: "price",
         name: "价格",
         validClass: ".pop-manage-detail-header-name.jazz-header",
-      },
-      {
-        key: "carbon",
-        name: "碳排放",
-        validClass: ".jazz-carbon-detail-header-name.jazz-carbon-header",
       },
     ],
   },
