@@ -87,11 +87,11 @@ export const contentPageConfig: Array<MenuConfigObject> = [
         name: "层级节点配置",
         validClass: ".jazz-tag-leftpanel-header-item",
       },
-      {
-        key: "data_validation",
-        name: "数据质量维护",
-        validClass: ".data-quality-maintenance-filter-time",
-      },
+      // {
+      //   key: "data_validation",
+      //   name: "数据质量维护",
+      //   validClass: ".data-quality-maintenance-filter-time",
+      // },
     ],
   },
 ];
