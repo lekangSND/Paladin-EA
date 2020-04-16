@@ -12,7 +12,7 @@ import {
   isMaintaining,
   screenshot,
   upload,
-  initOssClient
+  initOssClient,
 } from "./util";
 import checkMainFeatures from "./featureModule";
 import login from "./login";
@@ -38,7 +38,7 @@ let envArgs: Array<string> = [
   "HARDCORE_OSS_ENDPOINT",
   "OSS_BUCKET_DATA",
   "COMMON_ALIYUN_ACCESS_SECRET",
-  "COMMON_ALIYUN_ACCESS_ID"
+  "COMMON_ALIYUN_ACCESS_ID",
 ];
 
 envArgs.forEach((item: string) => {
@@ -117,7 +117,7 @@ async function createPage(browser: puppeteer.Browser) {
   // page.on("requestfailed", (request) => {
   //   logger.debug("requestfailed: %s", request.url())
   // })
-  page.on("response", response => {
+  page.on("response", (response) => {
     if (!response.ok() && response.status() >= 400) {
       logger.debug(
         "response maybe error: %s, %s",
@@ -126,7 +126,7 @@ async function createPage(browser: puppeteer.Browser) {
       );
     }
   });
-  page.on("request", req => {
+  page.on("request", (req) => {
     let resourceType = req.resourceType();
     if (resourceType === "image") {
       req.abort();
@@ -139,7 +139,7 @@ async function createPage(browser: puppeteer.Browser) {
 }
 
 const navigationOption: puppeteer.NavigationOptions = {
-  waitUntil: ["domcontentloaded"]
+  waitUntil: ["domcontentloaded"],
 };
 const timeoutOption = { timeout: CLICK_TIMEOUT };
 
@@ -185,7 +185,7 @@ async function run(page: puppeteer.Page, config: config.Config) {
   startTime = new Date();
   let responses = await Promise.all([
     await page.click(config.loginButtonClass),
-    await page.waitForNavigation(navigationOption)
+    await page.waitForNavigation(navigationOption),
     // await page.waitForNavigation(navigationOption)
   ]);
   responses.forEach((item: any) => {
@@ -209,7 +209,7 @@ async function getBrowser() {
     "--no-sandbox",
     "--disable-setuid-sandbox",
     "--disable-gpu",
-    "--disable-accelerated-2d-canvas"
+    "--disable-accelerated-2d-canvas",
   ];
   logger.debug("SE_PROXY: %s", process.env["SE_PROXY"]);
   if (process.env["SE_PROXY"] === "1") {
@@ -218,11 +218,11 @@ async function getBrowser() {
   let browser = await puppeteer.launch({
     defaultViewport: {
       width: 1920,
-      height: 1080
+      height: 1080,
     },
     ignoreHTTPSErrors: true,
-    args
-    // headless: false
+    args,
+    headless: false,
   });
 
   return browser;
