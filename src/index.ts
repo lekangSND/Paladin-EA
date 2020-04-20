@@ -222,7 +222,6 @@ async function getBrowser() {
     },
     ignoreHTTPSErrors: true,
     args,
-    headless: false,
   });
 
   return browser;
