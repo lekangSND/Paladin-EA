@@ -203,28 +203,22 @@ async function run(page: puppeteer.Page, config: config.Config) {
 // cleanImage()
 
 async function getBrowser() {
-  let args = [
-    "--lang=zh-cn",
-    "--disable-dev-shm-usage",
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-gpu",
-    "--disable-accelerated-2d-canvas",
-  ];
-  logger.debug("SE_PROXY: %s", process.env["SE_PROXY"]);
+  let args = ['--lang=zh-cn', '--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-accelerated-2d-canvas']
+  logger.debug("SE_PROXY: %s", process.env["SE_PROXY"])
   if (process.env["SE_PROXY"] === "1") {
-    args.push("--proxy-server=101.231.121.17:80");
+    args.push('--proxy-server=101.231.121.17:80')
   }
   let browser = await puppeteer.launch({
     defaultViewport: {
       width: 1920,
-      height: 1080,
+      height: 1080
     },
     ignoreHTTPSErrors: true,
-    args,
-  });
+    args
+  })
 
-  return browser;
+
+  return browser
 }
 let isEnd = false;
 async function start() {
