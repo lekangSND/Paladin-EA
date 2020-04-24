@@ -20,17 +20,17 @@ export function getValidationCode(
     uri = "https://" + uri;
   }
   logger.info("trojan uri is %s", uri);
-  // request.get(uri, (error, response, body) => {
-  //   if (error) {
-  //     logger.error('error:', error)
-  //     callback("")
-  //   }
-  //   else {
-  //     logger.info("statusCode: %s, body: %s", response && response.statusCode, body)
-  //     callback(body)
-  //   }
-  // })
-  callback("99");
+  request.get(uri, (error, response, body) => {
+    if (error) {
+      logger.error('error:', error)
+      callback("")
+    }
+    else {
+      logger.info("statusCode: %s, body: %s", response && response.statusCode, body)
+      callback(body)
+    }
+  })
+  // callback("99");
 }
 
 export function isMaintaining() {

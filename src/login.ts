@@ -33,13 +33,13 @@ export default async (config: config.Config, page: puppeteer.Page) => {
   await screenshot(page, "sso")
 
   const { Result: { Id } } = <any>await veriCodeRes.json();
-  logger.debug(`vericode id is ${Id}`)
+  logger.info(`vericode id is ${Id}`)
 
   await new Promise((resolve, reject) => {
     getValidationCode(Id, async (val) => {
       try {
         const result = val
-        logger.debug("veri code value is", result)
+        logger.info("veri code value is", result)
 
         if (!result) throw new Error("validtion code is empty")
 
